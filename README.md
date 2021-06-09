@@ -10,4 +10,7 @@ initialize with node npm and provide keys, otherwise some mock-data versions are
 free Mapbox key is free
 WeatherBox free key allows for current day weather, must pay for forecast (5 day) though a mock-data generator is avaliable to supplement for display 
 
+Most of the code was built thanks to Andrew Mead's great Node course on udemy.com.
+The widget was reverse-engineered from weatherstack homepage then modified and then served with handlebars.
+
 
