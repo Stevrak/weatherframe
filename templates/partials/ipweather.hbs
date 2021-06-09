@@ -1,0 +1,25 @@
+<!-- pass data to data variable
+   et call ipweather data=[your object]
+-->
+<h1>ip check: <span style="color:blue">
+  {{#if data.ip}}{{ip}}
+  {{else}}undefined{{/if}}</span></h1>
+{{data.loc.flag}}
+<span>{{data.loc.city}}</span><br>
+Are we in the EU?
+{{#if data.loc.isEU}}
+  <span style="color:blue">yes</span>
+{{else}}
+  <span style="color:red">no</span>
+{{/if}}
+<br>
+latitude:<span style="color:blue">{{data.loc.lat}}</span><br>
+longitude:<span style="color:blue">{{data.loc.long}}</span><br>
+
+
+temp: {{data.weather.temp}}<br>
+rain: {{data.weather.rain}}<br>
+cloud: {{data.weather.cloud}}<br>
+pressure: {{data.weather.pressure}}<br>
+desc: {{data.weather.desc}}<br>
+<!--icon: {{data.weather.icon}}<br>-->

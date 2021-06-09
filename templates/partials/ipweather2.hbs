@@ -1,0 +1,22 @@
+<!-- pass data to data variable
+   etc. call ipweather data=[your object]
+-->
+{{flag}}
+<span>{{city}}</span><br>
+Are we in the EU?
+{{#if isEU}}
+  <span style="color:blue">yes</span>
+{{else}}
+  <span style="color:red">no</span>
+{{/if}}
+<br>
+latitude:<span style="color:blue">{{lat}}</span><br>
+longitude:<span style="color:blue">{{long}}</span><br>
+
+
+temp: {{weather.temp}}<br>
+rain: {{weather.rain}}<br>
+cloud: {{weather.cloud}}<br>
+pressure: {{weather.pressure}}<br>
+desc: {{weather.desc}}<br>
+<!--icon: {{ weather.icon}}<br>-->

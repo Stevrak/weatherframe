@@ -1,0 +1,33 @@
+<div class="weatherbox">
+    {{#if ip}}
+      <h1>ip check: <span style="color:blue">{{ip}}</span></h1>
+    {{/if}}
+
+  {{loc.flag}}
+  <span>{{loc.city}}</span><br>
+  Are we in the EU?
+    {{#if loc.isEU}}
+      <span style="color:blue">yes</span>
+    {{else}}
+      <span style="color:red">no</span>
+    {{/if}}
+  <br>
+  <table>
+    <tr><td>latitude</td><td>longitude</td></tr>
+    <tr style="color:blue"><td>{{lat}}</td><td>{{long}}</td></tr>
+  </table>
+
+  temp:<span class="item"> {{weather.temp}}</span><br>
+  rain:<span class="item"> {{weather.rain}}</span><br>
+  cloud:<span class="item"> {{weather.cloud}}</span><br>
+  pressure:<span class="item"> {{weather.pressure}}</span><br>
+  <table><tr>
+    {{#each weather.icon}}
+      <td><img src="{{this}}"></td>
+    {{/each}}
+  </tr><tr>
+    {{#each weather.desc}}
+      <td><h2>{{this}}</h2></td>
+    {{/each}}
+  </tr></table>
+</div>

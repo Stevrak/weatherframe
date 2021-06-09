@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="stylesheet" type="text/css" href="../css/wstyle.css">
+  </head>
+  <body>
+<div class="weather_animated">
+
+    <div class="location">
+      <span data-api="location">{{location.name}}</span>
+    </div>
+
+      <div class="weather_top_box">
+        <div class="main_left">
+            <span data-api="current_main_descr">{{current.weather_descriptions.[0]}}</span>
+            <i data-api="current_icon" class="{{underscore current.weather_descriptions.[0]}}"></i>
+        </div>
+        <div class="main_middle">
+          <span>Temp</span>
+          <span data-api="current_temperature" class="temperature big">{{current.temperature}}°c</span>
+        </div>
+        <div class="main_right">
+          <span data-api="current_wind_speed" class="wind">Wind: {{current.wind_speed}} kmph</span>
+          <span data-api="current_precip" class="precip">Precip: {{current.precip}} mm</span>
+          <span data-api="current_pressure" class="pressure">Pressure: {{current.pressure}} mb</span>
+        </div>
+      </div>
+        <div data-api="forecast_week" class="week">
+          {{#each forecast}}
+          <div class="day">
+            <span class="name">{{dateToDay this.date}}</span><i class="{{underscore this.hourly.[0].weather_descriptions.[0]}}"></i>
+            <span class="temperature">{{this.avgtemp}} °c</span>
+          </div>
+          {{/each}}
+        </div>
+
+      </div>
+      </body>
+      </html>

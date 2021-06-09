@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Sample widget demonstrating API use within node/express project">
+        <meta name="author" content="Stephen Joys, Andrew Mead, WeatherStack">
+        <link rel="stylesheet" href="css/wstyle.css">
+        <link rel="stylesheet" href="css/page.css">
+    </head>
+
+    <body>
+      <div style="color:white;margin-left:10px;font-size:1.5em;">
+        <h1>Weather frame</h1>
+        copycat of <a href="https://weatherstack.com/">weatherstack</a> homepage widget
+      </div>
+      <div class="flex-set">
+
+        <div>
+          <h2>In-page weather data from user input</h2>
+          <div class="flex-small">
+              <p> Current day data is retrieved via geolocation/weatherstack APIs<br>
+                  while 5-day forecast data is only avaliable with paid API</p>
+
+              <form id="weatherform">
+                <input placeholder="enter address">
+                <button>Search</button>
+             </form>
+        </div>
+        <div id="results" class="results"></div>
+      </div>
+
+       <div>
+         <div class="flex-small">
+           <h2>Same but just mock data</h2>
+           <button id="mock_button">get mock data</button>
+         </div>
+         <div id="mock_results" class="results"></div>
+      </div>
+
+      <div>
+        <h2> iframe </h2>
+        <span> format that can be loaded from external page in an iframe</span>
+        <div style="display:flex;justify-content:center;"><div>
+          <iframe src="/weather_iframe/toronto" width="508" height="308" frameborder="0" scrolling="no"></iframe>
+        </div></div>
+      </div>
+
+      <div>
+        <h2> iframe mock data</h2>
+        <span> mock data format that can be loaded from external page in an iframe</span>
+        <div style="display:flex;justify-content:center;"><div>
+          <iframe src="/weather_mock_iframe" width="508" height="308" frameborder="0" scrolling="no"></iframe>
+        </div></div>
+      </div>
+
+    </div>
+
+    <!-- add listeners to call routes to populate in-page weather data -->
+    <script src="./js/weather_mock.js"></script>
+    </body>
+</html>
