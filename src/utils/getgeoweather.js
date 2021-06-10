@@ -17,13 +17,13 @@ const getGeoWeather = (address) => {
           reject("geocode failed: "+error);
         }else{
 
-          console.log(data);
-
           // use data from geocode to call forecast
           forecast(data.lat,data.long,(error,weather)=>{
               if (error){
                 reject("forecast failed: "+error);
               }else{
+                // geocode has more verbal location data
+                weather.location.name = data.location;
                 resolve(weather);
                 //resolve({geo:data, weather:weather}); // not formatted correctly for mock_forecast
               }

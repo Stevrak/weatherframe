@@ -1,51 +1,18 @@
 body{
-  background: url(../svg/mountains.svg);
-  background-size:cover;
-  backgrouund-repeat:no-repeat;
-  background-color:#184158;
-  font-family: "Open Sans","Gill Sans MT","Gill Sans",Corbel,Arial,sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;
+    background: url(../svg/mountains.svg);
+    background-size:cover;
+    backgrouund-repeat:no-repeat;
+    background-color:#184158;
+    font-family: "Open Sans","Gill Sans MT","Gill Sans",Corbel,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
 }
-.flex-set {
- display: flex;
- flex-wrap: wrap;
- align-content:flex-start;
-}
-.flex-set > div {
- background-color: #f1f1f1;
- margin: 10px;
- padding: 20px;
- width:45%;
- border-radius: 5px;
- box-shadow: 5px 5px 10px black;
-}
-.flex-small{
- width:100%;
- display:flex;
- align-items:center;
- justify-content:space-around;
-}
-.delbutton {
- position: absolute;
- width:10px;
- height:10px;
- background-color:black;
- color:white;
- float: right;
-}
-.results{
- padding-top:5px;
-}
-.results > div,
-.results > iframe {
- margin-left:auto;
- margin-right:auto;
-}
+
 a {
  color:orange;
 }
+
 button{
  background-color: #f47b21;
  border: none;
@@ -57,9 +24,66 @@ button{
  display: inline-block;
  font-size: 1.2em;
 }
+
 input{
  font-size: 1.2em;
  border-radius: 2px;
    padding: 4px 5px;
  border: 1px solid black;
+}
+
+hr {
+  border-top: 5px solid white;
+  border-radius: 2px;
+  box-shadow: 2px 4px 5px grey;
+}
+
+
+.flex-set {
+   display: flex;
+   flex-wrap: wrap;
+   align-content:flex-start;
+}
+.flex-set > div {
+   background-color: #f1f1f1;
+   margin: 10px;
+   padding: 20px;
+   width:45%;
+   border-radius: 5px;
+   box-shadow: 5px 5px 10px black;
+}
+.flex-small{
+   width:100%;
+   display:flex;
+   align-items:center;
+   justify-content:space-around;
+}
+
+.flex-small > div,
+.flex-small > span,
+.flex-small > form,
+.flex-small > button {
+
+    padding:5px;
+
+}
+
+.delbutton {
+   position: absolute;
+   width:10px;
+   height:10px;
+   background-color:black;
+   color:white;
+   float: right;
+}
+
+
+.results{
+    padding-top:5px;
+}
+
+.results > div,
+.results > iframe {
+   margin-left:auto;
+   margin-right:auto;
 }

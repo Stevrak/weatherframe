@@ -1,9 +1,8 @@
 const request = require('request');
 
-//ipstack.com lookup address from inspect
-//
+// ipstack.com lookup address from inspect
+
 //http://api.ipstack.com/174.95.199.49?access_key=<API_KEY>
-// get mapbox api data
 
 const ipstack = (location,callback) => {
     const key = process.env.IPSTACK_API;
@@ -14,20 +13,39 @@ const ipstack = (location,callback) => {
 
     request({url:url,json:true}, (error,response) => {
     if (error){
-        callback("error requesting ipstack",undefined);
+        callback("error requesting ipstack: "+error, undefined);
 
     }else{
+
+        // passback concise results
         const loc = response.body;
-        // passback error/results
+        console.log("ipstack returns:",loc)
         callback(undefined,{
             city:loc.city,
-            flag:loc.location.country_flag_emoji,
-            isEU:loc.location.is_eu,
-            lat: loc.latitude,
-            long:loc.longitude
-        });
+            location:loc.city+", "+loc.region_name+ ", "+ loc.country_name,
+            zip:loc.zip,
+            lat:loc.latitude,
+            long:loc.longitude});
+
     }// ipstack response
   });// request
 }// ipstack func def
 
-module.exports = ipstack;
+
+// promise wrapper we can await for
+
+const getIpLocation = (address) => {
+  return new Promise((resolve,reject)=>{
+
+    // use use ip to get location data
+    ipstack(address,(error,location)=>{
+      if (error){
+        reject(error);
+      }else{
+        resolve(location);
+      }
+    });
+ });
+}
+
+module.exports = getIpLocation;

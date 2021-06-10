@@ -11,13 +11,18 @@ const key = process.env.WEATHER_API;
 
 const forecast= (lat,long,callback) => {
       const url = 'http://api.weatherstack.com/current?access_key='+key+
-                  '&query='+lat+','+long;
+                  '&query='+lat+','+long + '&forecast_days=5&hourly=0';
       request({url:url,json:true}, (error,response) => {
           if (error){
               callback("error connecting to weatherstack" , undefined);
           }else if(response.body.error){
               callback("error requesting weatherstack for"+lat+','+long , undefined);
           }else{
+            //
+            callback(undefined, response.body)
+
+            /*
+            // if we wanted to define our passed back data
             const w = response.body.current;
             callback(undefined,{
                 location:response.body.location.name,
@@ -29,8 +34,9 @@ const forecast= (lat,long,callback) => {
                 desc:w.weather_descriptions,
                 icon:w.weather_icons
             });
+            */
           }
-      }); //request
+      }); // endrequest
 }
 module.exports = forecast;
 
