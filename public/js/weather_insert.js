@@ -22,7 +22,6 @@ if (weatherForm != null){
   })
 }
 
-
 // test full widget insertion from fetch /weather/html
 const mockButton = document.getElementById('mock_button');
 if (mockButton!=null){
