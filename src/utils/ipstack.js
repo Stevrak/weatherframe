@@ -13,13 +13,12 @@ const ipstack = (location,callback) => {
 
     request({url:url,json:true}, (error,response) => {
     if (error){
-        callback("error requesting ipstack: "+error, undefined);
+        callback("error requesting ipstack: "+ error, undefined);
 
     }else{
 
         // passback concise results
         const loc = response.body;
-        console.log("ipstack returns:",loc)
         callback(undefined,{
             city:loc.city,
             location:loc.city+", "+loc.region_name+ ", "+ loc.country_name,
