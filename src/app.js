@@ -4,6 +4,7 @@ const express = require('express');
 const hbs = require('hbs');
 const request = require('request');
 
+const port = process.env.PORT || 3000;
 const app = express();
 const publicPath = path.join(__dirname,'../public');
 const viewsPath = path.join(__dirname,'../templates/views');
@@ -38,6 +39,6 @@ app.get('*',(req,res) =>{
 
 
 // continue server
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log('Server is up');
 });
