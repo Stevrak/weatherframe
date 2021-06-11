@@ -11,7 +11,7 @@ if (weatherForm != null){
     if (search) search = search.value;
     else        search = "";
 
-      fetch('http://localhost:3000/weather/' + search).then((response) =>{
+      fetch('/weather/' + search).then((response) =>{
         response.json().then((data)=>{
           document.getElementById('results').innerHTML = data.html;
 
