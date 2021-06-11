@@ -7,7 +7,7 @@ if (weatherForm != null){
   weatherForm.addEventListener('submit',(e) =>{
     e.preventDefault();
     if (search && search.value){
-      fetch('http://localhost:3000/geoweather/html?address=' + search.value).then((response) =>{
+      fetch('http://localhost:3000/weather/' + search.value).then((response) =>{
         response.json().then((data)=>{
           document.getElementById('results').innerHTML = data.root;
 

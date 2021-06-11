@@ -73,63 +73,44 @@ router.get('/getweather',(req,res) =>{
   res.render('weather')
 })
 
+// retrieve new weather form for html insertion
+// geoweather chains the mapbox API and weather API to get location then lat, long
+router.get('/weather/:location', async (req,res)=>{
+  console.log(req);
+  // use getWeather to take location or generate from ip if not included
 
-// returns weather data built from address (say, toronto, or street etc)
-// compiled from 2 api calls;
-// first : https://api.mapbox.com/geocoding/v5 for lat/long from location string,
-// then lat/long gets weather info from:
-// second : http://api.weatherstack.com/
-
-router.get('/weather',(req,res) => {
-if (!req.query.address){
-  res.send("no location specified.");
-}else{
-  geocode(encodeURIComponent(req.query.address), (error, data) => {
-      if (error){
-        console.log("geocode error")
-        res.send({error});
-      }else{
-        // use data from geocode to call forecast
-        forecast(data.lat,data.long,(error,weather)=>{
-            if (error){
-              res.send({html:error})
-            }else{
-                const data2 = {
-                loc:data,
-                weather:weather
-              }
-              console.log(data2);
-              res.send({html:geoweathertemplate(data2)});
-            }
-        });// end forecast()
-      }
+  const data = await getWeather(req).catch((e)=>{
+      res.send('<div style="color:red">'+ e +'</div>')
   });
-}
-})// router.get
 
+  // recieved data, append our fake forecast if required, and send
+  if (data){
+    if (!('forecast' in data))
+      data.forecast = forecast_addon(data);
 
+    res.send({root:forecasttemplate(data)});
+  }
+});
 
 // retrieve new weather form for html insertion
 // geoweather chains the mapbox API and weather API to get location then lat, long
-router.get('/geoweather/html', async (req,res)=>{
-  let location;
-  if (!req.query.address){
-    res.send({root:"no location specified."});
+router.get('/weather', async (req,res)=>{
 
-  }else{
+  // use getWeather to take location or generate from ip if not included
+  const data = await getWeather(req).catch((e)=>{
+      res.send('<div style="color:red">'+ e +'</div>')
+  });
 
-      // getWeather located at ../utils/getWeather
-      const data = await getWeather(req.query.address).catch((e)=>{
-          res.send({root:'<div style="color:red">'+ e +'</div>'})
-      });
+  // recieved data, append our fake forecast if required, and send
+  if (data){
+    if (!('forecast' in data))
+      data.forecast = forecast_addon(data);
 
-    // if successful, got free API single day (current) data
-    if (data){
-      data.forecast = forecast_addon(data); //append mock 5-day forcast
-      res.send({root:forecasttemplate(data)});
-    }
- }
+    res.send({root:forecasttemplate(data)});
+  }
 });
+
+
 
 // request weather widget created with mock data
 
@@ -149,23 +130,20 @@ router.get('/weather_mock', async (req,res)=>{
 // this is done to cover the lack of forecast data, which requires a paid API key
 
 router.get('/weather_iframe/:location', async (req,res)=>{
-
+  console.log(req);
   // use getWeather to take location or generate from ip if not included
 
   const data = await getWeather(req).catch((e)=>{
       res.send('<div style="color:red">'+ e +'</div>')
   });
 
-  // recieved data, append our fake forecast to it and send
+  // recieved data, append our fake forecast if required, and send
   if (data){
-    console.log("data has forecast? : ", 'forecast' in data)
-      if (!('forecast' in data)){
+    if (!('forecast' in data))
+      data.forecast = forecast_addon(data);
 
-        data.forecast = forecast_addon(data);
-        console.log("data has forecast after? : ", 'forecast' in data)
-      }
-      res.send(forecasttemplate_iframe(data));
-    }
+    res.send(forecasttemplate_iframe(data));
+  }
 });
 
 
@@ -179,55 +157,11 @@ router.get('/weather_iframe', async (req,res)=>{
 
   // recieved data, append our fake forecast to it and send
   if (data){
-      if (!data.forecast) data.forecast = forecast_addon(data);
-      res.send(forecasttemplate_iframe(data));
-    }
-});
-// if no provided location for iframe call
-// look up user ip and use that to find world location then weather
+    if (!('forecast' in data))
+      data.forecast = forecast_addon(data);
 
-router.get('/weather_iframe_old_old', async (req,res)=>{
-
-    // get ip of the user
-    const ip = await getIp(req);
-
-    // then get the location from there
-    const loc = await ipstack(ip).catch((e)=>{
-      res.send('<div style="color:red">'+ e +'</div>')
-    });
-
-    // now find weather at location
-    const weather = await getGeoWeather(loc.zip || loc.city).catch((e)=>{
-        res.send('<div style="color:red">'+ e +'</div>')
-    });
-
-    // append mock 5-day forecast to it and return as handlebars frame
-    if (weather){
-      weather.forecast = forecast_addon(weather);
-      res.send(forecasttemplate_iframe(weather));
-    }
-});
-
-router.get('/weather_iframe_old', async (req,res)=>{
-
-    // get ip of the user
-    const ip = await getIp(req);
-
-    // then get the location from there
-    const loc = await ipstack(ip).catch((e)=>{
-      res.send('<div style="color:red">'+ e +'</div>')
-    });
-
-    // now find weather at location
-    const weather = await getGeoWeather(loc.zip || loc.city).catch((e)=>{
-        res.send('<div style="color:red">'+ e +'</div>')
-    });
-
-    // append mock 5-day forecast to it and return as handlebars frame
-    if (weather){
-      weather.forecast = forecast_addon(weather);
-      res.send(forecasttemplate_iframe(weather));
-    }
+    res.send(forecasttemplate_iframe(data));
+  }
 });
 
 
