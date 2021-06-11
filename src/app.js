@@ -30,6 +30,10 @@ app.get('',(req,res) =>{
   res.render('weather');
 });
 
+app.get('/',(req,res) =>{
+  res.render('weather');
+});
+
 // 404 page
 app.get('*',(req,res) =>{
   res.send("Sorry the link you followed doesn't exist");
@@ -40,5 +44,5 @@ app.get('*',(req,res) =>{
 
 // continue server
 app.listen(port,()=>{
-    console.log('Server is up');
+    console.log('Server is up on port:',port);
 });
