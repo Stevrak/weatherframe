@@ -11,7 +11,7 @@ const getWeather = require('../utils/getWeather');// takes general search term
 
 //const getWeather_all = require('../utils/getWeather_all');// takes general search term
 
-const getGeoWeather = require('../utils/getgeoWeather');// filters search through geocode for more specific location
+const getGeoWeather = require('../utils/getgeoweather');// filters search through geocode for more specific location
 
 const forecast_addon = require('../data/forecastdata_addon.js'); // replaces expensive($$) forecast return data with sample data
 const getIp = require ('../utils/getIp');
